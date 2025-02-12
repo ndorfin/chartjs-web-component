@@ -8,7 +8,7 @@
   },
   "type": "module",
   "scripts": {
-
+		"start": "http-server ."
   },
   "author": "Shaun O'Connell <ndorfin@gmail.com>",
   "license": "MIT"
