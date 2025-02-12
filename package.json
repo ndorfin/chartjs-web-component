@@ -1,0 +1,15 @@
+{
+  "name": "chartjs-web-component",
+  "version": "1.0.0",
+  "description": "A bespoke Chart.js Web Component wrapper",
+  "module": "true",
+  "engines": {
+	"node": "20.15.1"
+  },
+  "type": "module",
+  "scripts": {
+
+  },
+  "author": "Shaun O'Connell <ndorfin@gmail.com>",
+  "license": "MIT"
+}
