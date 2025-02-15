@@ -22,18 +22,15 @@ export default class WCChart extends HTMLElement {
 	}
 
 	#invoke() {
-		let canvas = document.createElement('canvas');
-		this.append(canvas);
-		this.canvas = canvas;
+		this.canvas = document.createElement('canvas');
+		this.append(this.canvas);
 		this.#bind();
 	}
 
-	#import() {
-		(async () => {
-			await import(URL_CHARTJS).then(() => {
-				this.#invoke();
-			});
-		})();
+	async #import() {
+		await import(URL_CHARTJS).then(() => {
+			this.#invoke();
+		});
 	}
 
 	connectedCallback() {

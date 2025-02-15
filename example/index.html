@@ -3,5 +3,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chart.js Web Component example</title>
-<wc-chart type="line" data="[0,1,1,2,3,5,8,13]" label="Fibonacci sequence"></wc-chart>
+<style>
+	wc-chart {
+		display: block;
+		max-inline-size: 100%;
+		aspect-ratio: 2;
+
+		& canvas {
+			max-inline-size: 100%;
+			object-fit: contain;
+			aspect-ratio: 2;
+		}
+	}
+</style>
+<wc-chart
+	type="line"
+	label="Fibonacci sequence"
+	data="[0,1,1,2,3,5,8,13]"
+></wc-chart>
 <script type="module" src="../src/wc-chart.mjs"></script>
