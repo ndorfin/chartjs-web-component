@@ -1,102 +1,56 @@
-const URL_CHARTJS = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js';
-const SCRIPT_ID = 'chart-js';
-const MODULE_MAP = {
-	bar: [
-		BarController,
-		BarElement,
-		CategoryScale,
-		LinearScale,
-	],
-	bubble: [
-		BubbleController,
-		PointElement,
-		LinearScale,
-	],
-	doughnut: [
-		DoughnutController,
-		ArcElement,
-	],
-	line: [
-		LineController,
-		LineElement,
-		PointElement,
-		CategoryScale,
-		LinearScale,
-	],
-	pie: [
-		PieController,
-		ArcElement,
-	],
-	polararea: [
-		PolarAreaController,
-		ArcElement,
-		RadialLinearScale,
-	],
-	radar: [
-		RadarController,
-		LineElement,
-		PointElement,
-		RadialLinearScale,
-	],
-	scatter: [
-		ScatterController,
-		PointElement,
-		LinearScale,
-	]
-}
+const URL_CHARTJS = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js';
 
 export default class WCChart extends HTMLElement {
 
 	chart = null;
 	canvas = null;
 
-	#installDependencies() {
-		let script = document.createElement('script');
-		script.id = SCRIPT_ID;
-		script.src = URL_CHARTJS;
-		script.defer = true;
-		script.onload = this.#invoke;
-		document.head.append(script);
-	}
-
-	#bootup() {
-		if (!window.Chart) {
-			this.#installDependencies();
-		} else {
-			this.#invoke();
-		}
+	#bind() {
+		this.chart = new window.Chart(
+			this.canvas,
+			{
+				type: this.type,
+				data: {
+					datasets: [{
+						label: this.label,
+						data: this.data
+					}],
+					labels: this.data,
+				}
+			}
+		);
 	}
 
 	#invoke() {
-		(async () => {
-			await import(URL_CHARTJS)
-				.then((returnObj) => {
-					console.log(returnObj);
-					window.Chart.register(LineController, LineElement, PointElement, CategoryScale, LinearScale);
+		let canvas = document.createElement('canvas');
+		this.append(canvas);
+		this.canvas = canvas;
+		this.#bind();
+	}
 
-					this.canvas = document.createElement('canvas');
-					this.appendChild(canvas);
-				});
+	#import() {
+		(async () => {
+			await import(URL_CHARTJS).then(() => {
+				this.#invoke();
+			});
 		})();
 	}
 
-	#render() {
-		this.chart = new window.Chart(this.canvas.getContext('2d'), this.data);
-	}
-
-  attributeChangedCallback() {
-    this.#render()
-  }
-
 	connectedCallback() {
-		this.#bootup();
+		(window.Chart) ? this.#invoke() : this.#import();
 	}
 
 	get data() {
-		return this.getAttribute('data');
+		return JSON.parse(this.getAttribute('data'));
 	}
 
-	static get observedAttributes() {
-    return ['data'];
-  }
+	get label() {
+		return this.getAttribute('label');
+	}
+
+	get type() {
+		return this.getAttribute('type');
+	}
 }
+
+window.customElements.define('wc-chart', WCChart);
