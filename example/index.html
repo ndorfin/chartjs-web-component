@@ -26,8 +26,23 @@
 	<script type="application/json" slot="data" data-label="Regression">
 		[21,13,8,5,3,2,1,1]
 	</script>
-	<script type="application/json" slot="labels">
-		["","","","","","","",""]
+</wc-chart>
+<wc-chart
+	type="line"
+	label="Fibonacci sequence"
+	labels="End,,,,,,,Start"
+>
+	<script type="application/json" slot="data" data-label="Regression">
+		[21,13,8,5,3,2,1,1]
+	</script>
+</wc-chart>
+<wc-chart
+	type="line"
+	label="Fibonacci sequence"
+	labels="Start,,,,,,,End"
+>
+	<script type="application/json" slot="data" data-label="Progression">
+		[1,1,2,3,5,8,13,21]
 	</script>
 </wc-chart>
 <script type="module" src="../src/wc-chart.mjs"></script>

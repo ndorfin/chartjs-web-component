@@ -44,7 +44,14 @@ export default class WCChart extends HTMLElement {
 	}
 
 	get labels() {
-		return JSON.parse(this.querySelector('[slot="labels"]').innerHTML);
+		let labelAttr = this.getAttribute('labels');
+		if (labelAttr) return labelAttr.split(',');
+
+		let labelJSON = this.querySelector('[slot="labels"]');
+		if (labelJSON) return JSON.parse(labelJSON.innerHTML);
+
+		let emptyArray = new Array(this.data[0].data.length).fill('')
+		return emptyArray;
 	}
 
 	get label() {
