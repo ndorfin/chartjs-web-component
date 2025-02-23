@@ -11,12 +11,9 @@ export default class WCChart extends HTMLElement {
 			{
 				type: this.type,
 				data: {
-					datasets: [{
-						label: this.label,
-						data: this.data
-					}],
-					labels: this.data,
-				}
+					datasets: this.data,
+					labels: this.labels,
+				},
 			}
 		);
 	}
@@ -38,7 +35,16 @@ export default class WCChart extends HTMLElement {
 	}
 
 	get data() {
-		return JSON.parse(this.getAttribute('data'));
+		return Array.from(this.querySelectorAll('[slot="data"]')).map((item) => {
+			return {
+				label: item.getAttribute('data-label'),
+				data: JSON.parse(item.innerHTML),
+			};
+		});
+	}
+
+	get labels() {
+		return JSON.parse(this.querySelector('[slot="labels"]').innerHTML);
 	}
 
 	get label() {
