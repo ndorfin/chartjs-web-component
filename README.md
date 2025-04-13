@@ -67,7 +67,7 @@ That's it. You've got a basic line chart with a single series.
 
 As the Web Component's `connectedCallback` lifecycle function executes, it checks whether Chart.js is loaded into the `window` context.
 
-If not, it loads the Chart.js library using it's CDNJS offering.
+If not, it loads the Chart.js library using its jsDeliver CDN offering.
 
 It then creates a `canvas` element and then builds the Chart.js context within the Web Component.
 
