@@ -14,35 +14,70 @@
 			object-fit: contain;
 			aspect-ratio: 2;
 		}
+
+		& + wc-chart {
+			margin-block-start: 2rem;
+		}
 	}
 </style>
+
 <wc-chart
 	type="line"
-	label="Fibonacci sequence"
+	x-axis="1,2,3,4,5,6,7,8"
 >
-	<script type="application/json" slot="data" data-label="Progression">
-		[1,1,2,3,5,8,13,21]
-	</script>
-	<script type="application/json" slot="data" data-label="Regression">
-		[21,13,8,5,3,2,1,1]
-	</script>
-</wc-chart>
-<wc-chart
-	type="line"
-	label="Fibonacci sequence"
-	labels="End,,,,,,,Start"
->
-	<script type="application/json" slot="data" data-label="Regression">
-		[21,13,8,5,3,2,1,1]
-	</script>
-</wc-chart>
-<wc-chart
-	type="line"
-	label="Fibonacci sequence"
-	labels="Start,,,,,,,End"
->
-	<script type="application/json" slot="data" data-label="Progression">
+	<script type="application/json" data-axis="y" data-label="Progression">
 		[1,1,2,3,5,8,13,21]
 	</script>
 </wc-chart>
+
+<wc-chart
+	type="line"
+	label="Fibonacci sequence"
+>
+	<script type="application/json" data-axis="y" data-label="Progression">
+		[1,1,2,3,5,8,13,21]
+	</script>
+	<script type="application/json" data-axis="y" data-label="Regression">
+		[21,13,8,5,3,2,1,1]
+	</script>
+</wc-chart>
+
+<wc-chart
+	type="stacked-bar"
+	label="Fibonacci sequence"
+>
+	<script type="application/json" data-axis="y" data-label="Progression">
+		[1,1,2,3,5,8,13,21]
+	</script>
+	<script type="application/json" data-axis="y" data-label="Regression">
+		[21,13,8,5,3,2,1,1]
+	</script>
+</wc-chart>
+
+
+<wc-chart
+	type="line"
+	label="Fibonacci sequence"
+	x-axis="End,,,,,,,Start"
+>
+	<script type="application/json" data-axis="y" data-label="Regression">
+		[21,13,8,5,3,2,1,1]
+	</script>
+</wc-chart>
+
+<wc-chart
+	type="line"
+	label="Sales volume and performance"
+>
+	<script type="application/json" data-axis="y" data-position="left" data-label="Units">
+		[65, 59, 80, 81, 56, 55, 40]
+	</script>
+	<script type="application/json" data-axis="y" data-position="right" data-label="Percentage">
+		[5, 9, 7, 8, 6, 5, 3]
+	</script>
+	<script type="application/json" data-axis="x">
+		["March", "April", "May", "June", "July", "August", "September"]
+	</script>
+</wc-chart>
+
 <script type="module" src="../src/wc-chart.mjs"></script>
